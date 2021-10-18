@@ -1,0 +1,179 @@
+<head>
+    <meta name="referrer" content="no-referrer">
+    <!-- don't send HTTP referer for privacy purpose and to use Google Maps Geocoding API without key -->
+</head>
+<div class="container mt-5">
+    <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="mask flex-center">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-md-7 col-12 order-md-1 order-1">
+                                <center>
+                                    <h4>MY MART</h4>
+                                    <p>COMBO OFFERS</p> <br>
+                                </center>
+
+                            </div>
+                            <div class="col-md-5 col-12 order-md-2 order-2" style="top: 50px;"><img
+                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMy9wfcNEYvM39jRteOhCEorvPQEmD3Q951A&usqp=CAU" style="height: 250px; width: 300px;"
+                                    class="mx-auto mt-2 " alt="slide"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="mask flex-center">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-md-7 col-12 order-md-1 order-1" >
+                                <center>
+                                    <h4>MY MART</h4>
+                                    <p>MORE THAN 1000+ SELLERS ARE <br> NOW AVAILBALE AT MY MART ONLINE STORE</p> <br>
+                                </center>
+
+                            </div>
+                            <div class="col-md-5 col-12 order-md-2 order-2" style="top: 50px;"><img
+                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSja6zjWXLBmBmar8BaQqTvbxQnOxmOTkVBQ&usqp=CAU" style="height: 250px; width: 300px;"
+                                    class="mx-auto mt-2" alt="slide"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <a class="carousel-control-prev m-2" href="#myCarousel" role="button" data-slide="prev"> <span
+                class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a>
+        <a class="carousel-control-next m-2" href="#myCarousel" role="button" data-slide="next"> <span
+                class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a>
+    </div>
+    <center>
+        <div class="mt-2">
+            <h2 align="center"
+                style="font-size: 44px;font-style: normal;line-height: 56px;letter-spacing: 0.2px;font-family: Arial, Helvetica, sans-serif;">
+                <b>Order from your nearest<br>Supermarket</b>
+            </h2>
+        </div>
+        <div>
+            <p style="color: grey;font-family: Arial, Helvetica, sans-serif;">
+                <b>My Mart is a new startup established on January 2021 <br>We have partnered with more than thousands
+                    of sellers from Kerala <br></b>
+            </p>
+        </div>
+        <div class="col-lg-3 col-md-6 col-8 mb-4 mt-4">
+
+            <script
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUvMW5rkpS3oRtFC6oHbiNzoqBtGuPJRw&callback=initMap&libraries=places"></script>
+            <script type="text/javascript">
+
+                google.maps.event.addDomListener(window, 'load', intilize);
+                function intilize() {
+
+                    var autocomplete = new google.maps.places.Autocomplete(document.getElementById('txtautocomplete'));
+                    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                        var places = autocomplete.getplace();
+                        var location = "<b>Location:</b>" + places.formatted_address + "<br>";
+                        location += "<b>Latitude:</b>" + places.geometry.location.A + "<br>";
+                        location += "<b>Longitutde:</b>" + places.geometry.location.F + "<br>";
+                    })
+                    document.getElementById('lblresult').innerHTML = location
+                }
+            </script>
+            <div class="input-icons" style="border: 2px solid black;">
+                <i class="fa fa-map-marker-alt mt-2 ml-2" style="font-size:25px"></i>
+                <input type="text" placeholder="Enter the address" class="input-field" name="" id="txtautocomplete">
+                <label id="lblresult" hidden></label>
+            </div>
+        </div>
+    </center>
+
+
+</div>
+<section>
+    {{#if vendors}}
+    <center>
+        <h3>Select your preferred Store</h3>
+    </center>
+    <div class="container">
+        <div class="row">
+            {{#each vendors}}
+            <div class="col-lg-3 col-md-4 col-6 mb-2">
+                <a href="/view/{{this._id}}/a" style="text-decoration: none;">
+                    <div class="card" style="height: 19rem;border: hidden">
+                        <img class="card-img-top img-fluid" style="height: 50%;" src="/vendor-images/{{this._id}}.jpg"
+                            alt="Card image cap">
+                        <div class="card-body">
+                            <p class="card-title" style="font-size: 14px;"><b>{{this.storename}}</b></p>
+                            <p class="card-text">{{this.address}}</p>
+                            <p class="card-text" hidden id="status{{this._id}}">{{this.status}}</p>
+                            <p class="card-text text-primary" id="current{{this._id}}"></p>
+                        </div>
+                        <script>
+                            status = document.getElementById('status{{ this._id }}').innerText;
+                            if (status = true) {
+                                document.getElementById('current{{this._id}}').innerText = 'Opened now'
+                            }
+                            else {
+                                document.getElementById('current{{this._id}}').innerText = 'Closed now'
+                            }
+                        </script>
+
+                        <hr style="border: 1px solid;">
+                    </div>
+                </a>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+    {{else}}
+    <center>
+        <h3>Sorry!.. No Stores available now</h3>
+    </center>
+    {{/if}}
+
+
+</section>
+<div class="wrapperfooter">
+
+    <div class="push">
+
+    </div>
+</div>
+<div class="footer text-light" id="footerMymart">
+    <footer id="sticky-footer" class="py-4 bg-dark text-light text-light-50">
+        <div class="flex-center ml-3">
+            <ul class="ml-3">
+                <li><a title="Go to Home page" href="/" class="text-light"> Home page</a></li>
+                <li><a title="Go to Orders section" href="/view-orders" class="text-light"> Your Order</a></li>
+                <li><a title="Go to Cart" href="/cart" class="text-light"> Cart</a></li>
+                <li><a title="Go to Address section" href="/manage-address" class="text-light"> Manage address</a>
+                </li>
+            </ul>
+        </div>
+        <div class="container text-center">
+            <h5>FOLLOW US ON SOCIAL MEDIA</h5>
+            <section id="lab_social_icon_footer">
+                <!-- Include Font Awesome Stylesheet in Header -->
+                <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+                <div class="container">
+                    <div class="text-center center-block">
+                        <a href="https://www.facebook.com/bootsnipp"><i id="social-fb"
+                                class="fa fa-facebook-square fa-3x social"></i></a>
+                        <a href="https://twitter.com/bootsnipp"><i id="social-tw"
+                                class="fa fa-twitter-square fa-3x social"></i></a>
+                        <a href="https://plus.google.com/+Bootsnipp-page"><i id="social-gp"
+                                class="fa fa-google-plus-square fa-3x social"></i></a>
+                        <a href="mailto:#"><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
+                        <a href=""><i id="social-em" class="fa fa-instagram fa-3x social"></i></a>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <center><small class="text-center">Copyright &copy; MY MART 2020-2021</small></center>
+
+    </footer>
+</div>
+
+
+
+<link rel="stylesheet" href="/css/user/user.css" type="text/css">
+<script src="/javascripts/user/user.js"></script>

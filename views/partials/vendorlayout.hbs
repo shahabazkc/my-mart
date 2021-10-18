@@ -1,0 +1,154 @@
+<style>
+    body {}
+
+    .sidenav {
+        height: 100%;
+        /* Full-height: remove this if you want "auto" height */
+        width: 160px;
+        /* Set the width of the sidebar */
+        position: fixed;
+        /* Fixed Sidebar (stay in place on scroll) */
+        z-index: 1;
+        /* Stay on top */
+        top: 0;
+        /* Stay at the top */
+        left: 0;
+        background-color: #363740;
+        /* Black */
+        overflow-x: hidden;
+        /* Disable horizontal scroll */
+        padding-top: 20px;
+        border-right: green 5px solid;
+    }
+
+    hr {
+        border-top: 1px solid white;
+    }
+
+    .main {
+        top: 40px;
+    }
+
+    /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+    @media screen and (max-height: 450px) {
+        .sidenav {
+            padding-top: 15px;
+        }
+
+        .sidenav a {
+            font-size: 18px;
+        }
+    }
+
+    li:hover {
+        background-color: red;
+    }
+</style>
+<div id="notifications">
+    <center>
+        <div id="changedTime" style="display: none;overflow: hidden;position: fixed;">
+            <span class="btn text-light bg-success">Changed Time Successfully <i class="fa fa-check mt-1"
+                    style="font-size:22px;color:white"></i></span>
+        </div>
+    </center>
+
+</div>
+<style>
+    .fixed-header {
+        top:0;
+        width: 100%;
+        margin: 0 auto;
+        position: fixed;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+    }
+</style>
+<div id="divNavBar" style="background-color: white;margin-bottom: 120px;" class="fixed-header">
+    <div id="navbar-toggle" style="background-color: white;" class="scrollnav">
+        <div class="navbar">
+            <div class="toggle">
+                <button class="openbtn btn btn-success btn-lg" onclick="openNav()">☰</button>
+            </div>
+            <div class="navbar-item">
+                <b style="color: green;">MY MART</b>
+            </div>
+            <div class="navbar-item">
+                <a class="btn btn-primary">{{response}}</a>
+                <a href="/vendor/logout" class="btn btn-danger">Logout</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="sidenav" style="display: none;">
+    <ul class="list-unstyled ml-2">
+        <a href="/vendor" style="text-decoration: none;">
+            <li style="color:#A4A6B3 ;pointer-events: none;" class="mb-5">
+                <span style="text-transform: uppercase;"><img class="img-thumbnail rounded"
+                        src="/vendor-images/{{id}}.jpg" style="height: 80px;width: 80%;" />
+                    {{storename}}</span>
+
+            </li>
+        </a>
+    </ul>
+    <ul class="list-unstyled ml-2">
+        <a href="/vendor/orders">
+            <li>
+                <hr>
+                <i class="fas fa-shopping-bag " style="color: #A4A6B3;"> Orders</i>
+                <hr>
+            </li>
+        </a>
+        <a href="/vendor/order-history">
+            <li>
+                <hr>
+                <i class="fas fa-book" style="color: #A4A6B3;"> Order history</i>
+                <hr>
+            </li>
+        </a>
+        <a href="/vendor/products">
+            <li>
+                <hr>
+                <i class="fa fa-group" style="color: #A4A6B3;"> Products</i>
+                <hr>
+            </li>
+        </a>
+        <a href="/vendor/users">
+            <li>
+                <hr>
+                <i style="color: #A4A6B3;" class="fas fa-user-tie"> Users</i>
+                <hr>
+            </li>
+        </a>
+        <a href="/vendor/feedback">
+            <li>
+                <hr>
+                <i class="fas fa-book-reader" style="color: #A4A6B3;"> Feedback</i>
+                <hr>
+            </li>
+        </a>
+    </ul>
+    <ul class="list-unstyled ml-2">
+        <a href="/vendor/settings">
+            <li>
+                <hr>
+                <i class="fa fa-gear" style="color: #A4A6B3;">Settings</i>
+                <hr>
+            </li>
+        </a>
+    </ul>
+
+</div>
+<script>
+    function openNav() {
+
+        $('.sidenav').show()
+        $('#divNavBar').hide()
+    }
+
+
+</script>

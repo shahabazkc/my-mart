@@ -1,0 +1,246 @@
+{{#if product}}
+<center>
+    <div class="col-lg-3 col-md-6 col-8 mb-2">
+        <div class="input-icons" style="border: 2px solid black;">
+            <i class="fa fa-search ml-2" style="font-size:32px"></i>
+            <input type="text" value="Search" class="input-field" name="" id="">
+        </div>
+    </div>
+</center>
+<section id="section" class="mt-2">
+    <div class="container ">
+        <div class="row">
+            {{#each product}}
+            <div class="col-lg-3 col-md-4 col-6 mb-2">
+                <div style="height: 450px;">
+                    <div class="card" style="">
+                        <div data-toggle="modal" class="{{this.storename}}"
+                data-target="#a{{this._id}}">
+                            <img class="card-img-top img-fluid" style="height:11rem" src="/product-images/{{this._id}}.jpg"
+                                alt="Card image cap">
+                        </div>
+                        <div data-toggle="modal" class="{{this.storename}}"
+                data-target="#a{{this._id}}">
+                            <div class="card-body" style="font-size: 12px;">
+                                <h5 class="card-title">{{this.name}}</h5>
+                                <p class="card-text">{{this.description}}</p>
+
+                                </p>
+                                <p class="card-text" style="font-size: 12px;">Selled by: {{this.storename}}</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="card-text ml-3 mr-2">₹ {{this.price}}<a
+                                    onclick="addToCart('{{this._id}}','{{../categoryId}}','{{this.storeId}}')"
+                                    class="btn btn-success float-right"><b>+</b></a>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade top" id="a{{this._id}}" tabindex="-1">
+                <div class="modal-dialog ">
+                    <!--Content-->
+                    <div class="modal-content m-0">
+                        <!--Body-->
+                        <div class="row d-flex justify-content-center align-items-center">
+                            <div class="card" style="height: 100%;">
+                                <div class="content-1">
+                                    <span class="arrow-left">
+                                        <a onclick="closemodal('a{{this._id}}')"><i class="fas fa-arrow-left"
+                                                aria-hidden="true"> </i></a>
+                                    </span>
+                                    <div class="main-image" align="center">
+                                        <img id="mainimage" style="height: 200px;" class="mt-2 mb-2"
+                                            src="/product-images/{{this._id}}.jpg">
+                                    </div>
+                                    <hr>
+                                </div>
+                                <div class="content-3 ml-3 mr-3 mb-1">
+                                    <div class="branding">
+                                        <h3>{{this.name}}</h3>
+                                    </div>
+                                    <span style="font-size: 21px;">Price: ₹</span>
+                                    <span style="font-size: 21px;">{{this.price}}</span>
+                                    <div class="ratings mt-2 mb-4">
+                                        <span><b>Product rating: </b></span>
+                                        <span><i class="fas fa-star"></i></span>
+                                        <span><i class="fas fa-star"></i></span>
+                                        <span><i class="fas fa-star"></i></span>
+                                        <span><i class="fas fa-star"></i></span>
+                                        <span><i class="fas fa-star"></i></span>
+                                    </div>
+                                    <div class="paragraph">
+                                        <p><b>Description: {{this.description}}</b>
+                                        </p>
+                                    </div>
+                                    <div class="price">
+                                        <p><span><b>Store: {{this.storename}}</b></span></p>
+                                        <p><span><b>Selled by: {{this.vendor}}</b></span></p>
+                                        <div class="space"></div>
+                                        <button
+                                            onclick="addToCart('{{this._id}}','{{../categoryId}}','{{this.storeId}}')"
+                                            class="btn btn-primary form-control">Add to cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</section>
+<div id="id01" class="modal mr-5 ml-3">
+    <span onclick="document.getElementById('id01').style.display='none'" class="close"
+        title="Close Modal">&times;</span>
+    <div class="container">
+        <div style="margin-top: 10%;height: 550px;" class="modal-content">
+            <center style="margin-bottom: 5%;">
+                <h1 style="color: green;">MY MART</h1>
+            </center>
+            <li class="ml-3 mb-4"><b>Your cart contain other seller products.</b></li>
+            <li class="ml-3 mb-4"><b>A cart can only contain products from a seller.</b></li>
+            <li class="ml-3 mb-4"><b>Please delete the other seller items to add this product to the cart or click
+                    cancel
+                    to keep the old
+                    cart products</b></li>
+            <center>
+                <h1 style="margin-top: 5%;">Delete other sellers products from cart ?</h1>
+                <div class="clearfix">
+                    <button type="button" id="cancelclick" class="cancelbtn btn btn-info mr-3 btn-lg">Cancel</button>
+                    <button type="button" id="deleteclick" class="deletebtn btn btn-danger ml-3 btn-lg">Delete</button>
+                </div>
+            </center>
+        </div>
+
+
+    </div>
+    <br><br><br>
+</div>
+{{else}}
+<div class="container mt-5">
+    <div class="jumbotron">
+     <center class="mt-5"><h1> No products found in this category from this seller <i class="fa fa-search" style="font-size:48px;color:black"></i></h1></center>       
+    </div>
+
+</div>
+
+{{/if}}
+
+<div class="wrapperfooter">
+        
+        <div class="push">
+
+        </div>
+    </div>
+
+    <style>
+        html,
+        body{
+            height: 70%;
+        }
+        .wrapperfooter{
+            min-height: 100%;
+            height: auto !important;
+            height: 100%;
+            margin: 0 auto -142px;
+        }
+        footer {
+            left: 3px;
+            bottom: 0px;
+            width: 100%;
+            right: 3px;
+            margin-top: 100px;
+        }
+
+        .footer,
+        .push {
+            height: 142px;
+        }
+    </style>
+    <div class="footer text-light" id="footerMymart">
+        <footer id="sticky-footer" class="py-4 bg-dark text-light text-light-50">
+            <div class="flex-center ml-3">
+                <ul class="ml-3">
+                    <li><a title="Go to Home page" href="/" class="text-light"> Home page</a></li>
+                    <li><a title="Go to Orders section" href="/view-orders" class="text-light"> Your Order</a></li>
+                    <li><a title="Go to Cart" href="/cart" class="text-light"> Cart</a></li>
+                    <li><a title="Go to Address section" href="/manage-address" class="text-light"> Manage address</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="container text-center">
+                <h5>FOLLOW US ON SOCIAL MEDIA</h5>
+                <section id="lab_social_icon_footer">
+                    <!-- Include Font Awesome Stylesheet in Header -->
+                    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+                    <div class="container">
+                        <div class="text-center center-block">
+                            <a href="https://www.facebook.com/bootsnipp"><i id="social-fb"
+                                    class="fa fa-facebook-square fa-3x social"></i></a>
+                            <a href="https://twitter.com/bootsnipp"><i id="social-tw"
+                                    class="fa fa-twitter-square fa-3x social"></i></a>
+                            <a href="https://plus.google.com/+Bootsnipp-page"><i id="social-gp"
+                                    class="fa fa-google-plus-square fa-3x social"></i></a>
+                            <a href="mailto:#"><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
+                            <a href=""><i id="social-em" class="fa fa-instagram fa-3x social"></i></a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <center><small class="text-center">Copyright &copy; MY MART 2020-2021</small></center>
+
+        </footer>
+    </div>
+    <style>
+        #lab_social_icon_footer {
+            padding: 0px 0;
+            background-color: white;
+        }
+
+        #lab_social_icon_footer a {
+            color: #333;
+        }
+
+        #lab_social_icon_footer .social:hover {
+            -webkit-transform: scale(1.1);
+            -moz-transform: scale(1.1);
+            -o-transform: scale(1.1);
+        }
+
+        #lab_social_icon_footer .social {
+            -webkit-transform: scale(0.8);
+            /* Browser Variations: */
+
+            -moz-transform: scale(0.8);
+            -o-transform: scale(0.8);
+            -webkit-transition-duration: 0.5s;
+            -moz-transition-duration: 0.5s;
+            -o-transition-duration: 0.5s;
+        }
+
+        /*
+    Multicoloured Hover Variations
+*/
+
+        #lab_social_icon_footer #social-fb:hover {
+            color: #3B5998;
+        }
+
+        #lab_social_icon_footer #social-tw:hover {
+            color: #4099FF;
+        }
+
+        #lab_social_icon_footer #social-gp:hover {
+            color: #d34836;
+        }
+
+        #lab_social_icon_footer #social-em:hover {
+            color: red;
+        }
+    </style>
+<link rel="stylesheet" href="/css/user/view-products.css" type="text/css">
+<script src="/javascripts/user/view-products.js"></script>
